@@ -1,0 +1,8 @@
+# 以'#'开始的行，被视为注释.
+
+*.iml
+*.log
+.idea
+.Ds_Store
+target
+dependency-reduced-pom.xml
