@@ -1,4 +1,4 @@
-package explain;
+package TableApi.explain;
 
 import org.apache.flink.table.api.*;
 import org.apache.flink.table.descriptors.Csv;
@@ -8,8 +8,8 @@ import org.apache.flink.table.descriptors.Schema;
 import static org.apache.flink.table.api.Expressions.$;
 
 /**
- * @ClassName explain.TestTableApi2
- * @Description: //使用StatementSet.explain()方法的多槽计划的相应输出
+ * @ClassName TableApi.explain.TestTableApi2
+ * @Description: //使用StatementSet.TableApi.explain()方法的多槽计划的相应输出
  * @Date Create in 2020/11/13
  * @Author wjq
  */

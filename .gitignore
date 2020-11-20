@@ -4,5 +4,5 @@
 *.log
 .idea
 .Ds_Store
-target
-dependency-reduced-pom.xml
+.target
+
