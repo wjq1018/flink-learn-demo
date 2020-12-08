@@ -10,109 +10,149 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>demo1</module>
-        <module>table-sql</module>
+        <module>flink-java-quickStart</module>
+        <!--        <module>table-sql</module>-->
     </modules>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flink.version>1.11.2</flink.version>
-        <scala.version>2.12.11</scala.version>
         <java.version>1.8</java.version>
-        <scala.binary.version>2.12</scala.binary.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <lombok.version>1.18.4</lombok.version>
+        <swagger.version>1.5.21</swagger.version>
+        <flink.version>1.11.1</flink.version>
+        <flink.java.version>1.6.0</flink.java.version>
         <flink.jdbc.version>1.8.0</flink.jdbc.version>
+        <rocketmq.version>4.3.0</rocketmq.version>
+        <oracle.version>12.1.0.2</oracle.version>
+        <lombok.version>1.18.4</lombok.version>
+        <slf4j.api.version>1.7.25</slf4j.api.version>
+        <logback.version>1.1.7</logback.version>
+        <commons.math.version>2.2</commons.math.version>
+        <breeze.version>1.0</breeze.version>
+        <kafka.version>2.3.1</kafka.version>
+        <json.lib.version>2.4</json.lib.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <druid.version>1.1.22</druid.version>
+        <commons.math3.version>3.6.1</commons.math3.version>
+        <gson.version>2.8.6</gson.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
-
     <dependencies>
-        <!-- Apache Flink dependencies -->
-        <!-- These dependencies are provided, because they should not be packaged into the JAR file. -->
         <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-java</artifactId>
-            <version>${flink.version}</version>
-            <!--			<scope>provided</scope>-->
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-scala_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-            <!--			<scope>provided</scope>-->
-        </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-jdbc_2.11</artifactId>
-            <version>${flink.jdbc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-scala_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-api-scala_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-api-scala-bridge_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table-planner-blink_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka-0.11_${scala.binary.version}</artifactId>
-            <version>${flink.version}</version>
-        </dependency>
-
+        <!--flink consume data on kafka start-->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
-            <version>2.3.1</version>
+            <version>${kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka-0.11_2.12</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-statebackend-rocksdb_2.12</artifactId>
+            <version>${flink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${slf4j.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-csv</artifactId>
+            <artifactId>flink-streaming-java_2.12</artifactId>
             <version>${flink.version}</version>
-        </dependency>
-        <!--        -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients_2.12</artifactId>
             <version>${flink.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>${flink.version}</version>
+            <!-- provided在这表示此依赖只在代码编译的时候使用，运行和打包的时候不使用 -->
+            <!--<scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>${json.lib.version}</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+        <!--flink consume data on kafka end-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-jdbc_2.12</artifactId>
+            <version>${flink.jdbc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.noraui</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>${rocketmq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalanlp</groupId>
+            <artifactId>breeze_2.12</artifactId>
+            <version>${breeze.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>${commons.math3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>${dom4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.20</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -123,6 +163,79 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
+            <!--  指定模块打包-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <version>3.1.1</version>-->
+<!--                <configuration>-->
+<!--                    <filters>-->
+<!--                        <filter>-->
+<!--                            <artifact>*:*</artifact>-->
+<!--                            <excludes>-->
+
+<!--                                &lt;!&ndash; 滤掉这些文件,避免影响&ndash;&gt;-->
+<!--                                <exclude>META-INF/*.SF</exclude>-->
+<!--                                <exclude>META-INF/*.DSA</exclude>-->
+<!--                                <exclude>META-INF/*.RSA</exclude>-->
+
+<!--                                &lt;!&ndash; index指标计算层需要过滤的包&ndash;&gt;-->
+<!--                                <exclude>**/index/bondsIndx/**</exclude>-->
+<!--                                <exclude>**/index/bondsVaR/**</exclude>-->
+<!--                                <exclude>**/index/correlation/**</exclude>-->
+<!--                                <exclude>**/index/efficyATO/**</exclude>-->
+<!--                                <exclude>**/index/famaAndTiming/**</exclude>-->
+<!--                                <exclude>**/index/fixdIncModel/**</exclude>-->
+<!--                                <exclude>**/index/lqdtyRisk/**</exclude>-->
+<!--                                <exclude>**/index/optoinRisk/**</exclude>-->
+<!--                                <exclude>**/index/rateOfReturn/**</exclude>-->
+<!--                                <exclude>**/index/strsTesting/**</exclude>-->
+<!--                                <exclude>**/index/vaRVltRisk/**</exclude>-->
+<!--                                &lt;!&ndash;                <exclude>**/index/sysRiskAndRAR/JensenCtl*</exclude>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                <exclude>**/index/sysRiskAndRAR/BtCtl*</exclude>&ndash;&gt;-->
+
+<!--                                &lt;!&ndash;service 需要过滤的包&ndash;&gt;-->
+<!--                                <exclude>**/service/bondsIndx/**</exclude>-->
+<!--                                <exclude>**/service/bondsVaR/**</exclude>-->
+<!--                                <exclude>**/service/correlation/**</exclude>-->
+<!--                                <exclude>**/service/efficyATO/**</exclude>-->
+<!--                                <exclude>**/service/famaAndTiming/**</exclude>-->
+<!--                                <exclude>**/service/fixdIncModel/**</exclude>-->
+<!--                                <exclude>**/service/lqdtyRisk/**</exclude>-->
+<!--                                <exclude>**/service/optoinRisk/**</exclude>-->
+<!--                                <exclude>**/service/rateOfReturn/**</exclude>-->
+<!--                                <exclude>**/service/strsTesting/**</exclude>-->
+<!--                                <exclude>**/service/vaRVltRisk/**</exclude>-->
+<!--                                &lt;!&ndash;                <exclude>**/service/sysRiskAndRAR/oracle/JensenPServices*</exclude>&ndash;&gt;-->
+
+<!--                            </excludes>-->
+<!--                        </filter>-->
+<!--                    </filters>-->
+<!--                    <transformers>-->
+<!--                        <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
+<!--                            <resource>reference.conf</resource>-->
+<!--                        </transformer>-->
+<!--                    </transformers>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>
