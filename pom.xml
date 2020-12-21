@@ -11,7 +11,7 @@
     <modules>
         <module>demo1</module>
         <module>flink-java-quickStart</module>
-        <!--        <module>table-sql</module>-->
+        <module>AtlasRestClient</module>
     </modules>
 
     <properties>
@@ -149,6 +149,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.20</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
